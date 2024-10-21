@@ -7,31 +7,28 @@ namespace CrossDivisionApp
         static void Main(string[] args)
         {
             Console.WriteLine("Enter the first number:");
-            string input1 = Console.ReadLine();
+            string firstInput = Console.ReadLine();
             
             Console.WriteLine("Enter the second number:");
-            string input2 = Console.ReadLine();
+            string secondInput = Console.ReadLine();
             
-            DivideStrings(input1, input2);
+            PerformDivision(firstInput, secondInput);
         }
 
-        static void DivideStrings(string strNum1, string strNum2)
+        static void PerformDivision(string firstNumberStr, string secondNumberStr)
         {
             try
             {
-                // Convert strings to integers
-                int num1 = Convert.ToInt32(strNum1);
-                int num2 = Convert.ToInt32(strNum2);
+                int firstNumber = Convert.ToInt32(firstNumberStr);
+                int secondNumber = Convert.ToInt32(secondNumberStr);
                 
-                // Perform division
-                int result = num1 / num2;
-                
-                // Print the result
+                // Perform the division
+                int result = firstNumber / secondNumber;
                 Console.WriteLine($"Result: {result}");
             }
             catch (FormatException)
             {
-                Console.WriteLine("Error: One or both inputs are not valid integers.");
+                Console.WriteLine("Error: One of the inputs is not a valid integer.");
             }
             catch (DivideByZeroException)
             {
@@ -44,4 +41,4 @@ namespace CrossDivisionApp
         }
     }
 }
-dotnet run
+
