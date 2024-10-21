@@ -1,0 +1,47 @@
+using System;
+
+namespace CrossDivisionApp
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Enter the first number:");
+            string input1 = Console.ReadLine();
+            
+            Console.WriteLine("Enter the second number:");
+            string input2 = Console.ReadLine();
+            
+            DivideStrings(input1, input2);
+        }
+
+        static void DivideStrings(string strNum1, string strNum2)
+        {
+            try
+            {
+                // Convert strings to integers
+                int num1 = Convert.ToInt32(strNum1);
+                int num2 = Convert.ToInt32(strNum2);
+                
+                // Perform division
+                int result = num1 / num2;
+                
+                // Print the result
+                Console.WriteLine($"Result: {result}");
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Error: One or both inputs are not valid integers.");
+            }
+            catch (DivideByZeroException)
+            {
+                Console.WriteLine("Error: Cannot divide by zero.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An unexpected error occurred: {ex.Message}");
+            }
+        }
+    }
+}
+dotnet run
