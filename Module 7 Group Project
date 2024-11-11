@@ -1,0 +1,171 @@
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        // Initialize the dictionary with movie titles as keys and their release years as values
+        Dictionary<string, List<string>> entertainmentDictionary = new Dictionary<string, List<string>>();
+
+        // Menu for user interaction
+        bool exitProgram = false;
+        while (!exitProgram)
+        {
+            Console.Clear();
+            Console.WriteLine("Entertainment Dictionary Operations:");
+            Console.WriteLine("1. Populate the Dictionary");
+            Console.WriteLine("2. Display Dictionary Contents");
+            Console.WriteLine("3. Remove a Key");
+            Console.WriteLine("4. Add a New Key and Value");
+            Console.WriteLine("5. Add a Value to an Existing Key");
+            Console.WriteLine("6. Sort the Keys");
+            Console.WriteLine("7. Exit");
+            Console.Write("Choose an option (1-7): ");
+            string userChoice = Console.ReadLine();
+
+            switch (userChoice)
+            {
+                case "1":
+                    PopulateDictionary(entertainmentDictionary);
+                    break;
+
+                case "2":
+                    DisplayDictionaryContents(entertainmentDictionary);
+                    break;
+
+                case "3":
+                    RemoveKey(entertainmentDictionary);
+                    break;
+
+                case "4":
+                    AddNewKeyAndValue(entertainmentDictionary);
+                    break;
+
+                case "5":
+                    AddValueToExistingKey(entertainmentDictionary);
+                    break;
+
+                case "6":
+                    SortKeys(entertainmentDictionary);
+                    break;
+
+                case "7":
+                    exitProgram = true;
+                    Console.WriteLine("Exiting program...");
+                    break;
+
+                default:
+                    Console.WriteLine("Invalid choice. Please try again.");
+                    break;
+            }
+        }
+    }
+
+    // Function to populate the dictionary with predefined entries
+    static void PopulateDictionary(Dictionary<string, List<string>> dictionary)
+    {
+        dictionary.Clear(); // Clear the dictionary before adding new data
+
+        dictionary.Add("The Godfather", new List<string> { "1972", "Crime", "Drama" });
+        dictionary.Add("The Dark Knight", new List<string> { "2008", "Action", "Crime" });
+        dictionary.Add("Bohemian Rhapsody", new List<string> { "2018", "Music", "Biography" });
+        dictionary.Add("Titanic", new List<string> { "1997", "Romance", "Drama" });
+
+        Console.WriteLine("Dictionary populated with movies and music.");
+        Console.WriteLine("Press Enter to continue...");
+        Console.ReadLine();
+    }
+
+    // Function to display the contents of the dictionary
+    static void DisplayDictionaryContents(Dictionary<string, List<string>> dictionary)
+    {
+        Console.WriteLine("\nDictionary Contents:");
+        foreach (var entry in dictionary)
+        {
+            Console.WriteLine($"Title: {entry.Key}");
+            Console.WriteLine("Genres/Details: " + string.Join(", ", entry.Value));
+            Console.WriteLine("----------------------");
+        }
+        Console.WriteLine("\nPress Enter to continue...");
+        Console.ReadLine();
+    }
+
+    // Function to remove a specified key from the dictionary
+    static void RemoveKey(Dictionary<string, List<string>> dictionary)
+    {
+        Console.Write("Enter the title of the movie or music to remove: ");
+        string titleToRemove = Console.ReadLine();
+
+        if (dictionary.ContainsKey(titleToRemove))
+        {
+            dictionary.Remove(titleToRemove);
+            Console.WriteLine($"Removed '{titleToRemove}' from the dictionary.");
+        }
+        else
+        {
+            Console.WriteLine($"No entry found for '{titleToRemove}'.");
+        }
+        Console.WriteLine("\nPress Enter to continue...");
+        Console.ReadLine();
+    }
+
+    // Function to add a new key-value pair to the dictionary
+    static void AddNewKeyAndValue(Dictionary<string, List<string>> dictionary)
+    {
+        Console.Write("Enter the title for the new movie/music: ");
+        string newTitle = Console.ReadLine();
+
+        if (!dictionary.ContainsKey(newTitle))
+        {
+            Console.Write("Enter the genres or details (comma separated): ");
+            string genresInput = Console.ReadLine();
+            List<string> genres = new List<string>(genresInput.Split(','));
+
+            dictionary.Add(newTitle, genres);
+            Console.WriteLine($"'{newTitle}' added to the dictionary.");
+        }
+        else
+        {
+            Console.WriteLine($"'{newTitle}' already exists in the dictionary.");
+        }
+        Console.WriteLine("\nPress Enter to continue...");
+        Console.ReadLine();
+    }
+
+    // Function to add a value to an existing key in the dictionary
+    static void AddValueToExistingKey(Dictionary<string, List<string>> dictionary)
+    {
+        Console.Write("Enter the title of the movie/music to update: ");
+        string titleToUpdate = Console.ReadLine();
+
+        if (dictionary.ContainsKey(titleToUpdate))
+        {
+            Console.Write("Enter the new value to add (e.g., genre or detail): ");
+            string newDetail = Console.ReadLine();
+
+            dictionary[titleToUpdate].Add(newDetail);
+            Console.WriteLine($"Added '{newDetail}' to '{titleToUpdate}'.");
+        }
+        else
+        {
+            Console.WriteLine($"No entry found for '{titleToUpdate}'.");
+        }
+        Console.WriteLine("\nPress Enter to continue...");
+        Console.ReadLine();
+    }
+
+    // Function to sort the keys in the dictionary
+    static void SortKeys(Dictionary<string, List<string>> dictionary)
+    {
+        Console.WriteLine("Sorted Dictionary (by title):");
+        foreach (var entry in new SortedDictionary<string, List<string>>(dictionary))
+        {
+            Console.WriteLine($"Title: {entry.Key}");
+            Console.WriteLine("Genres/Details: " + string.Join(", ", entry.Value));
+            Console.WriteLine("----------------------");
+        }
+        Console.WriteLine("\nPress Enter to continue...");
+        Console.ReadLine();
+    }
+}
